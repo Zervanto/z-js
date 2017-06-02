@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>eval and Function</title>
+</head>
+<body>
+<script>
+    //eval直接调用即执行
+    // 作用域:
+    //		eval 就在执行函数的当前作用域
+    //		在 eval 函数中, 使用字符串声明的变量, 在 eval 函数外面可以立即使用
+    //		即 eval 函数的执行作用域与当前环境作用域一致.
+    //一般要避免使用eval，可能会出现函数作用域的污染问题
+    eval('var a=1;');
+    console.log(a);//1
+    function foo(){
+        eval('var b=2;');
+    }
+    foo();
+   // console.log(b);//报错 b is not defined
+
+    // Function 是用来生成函数中的, 所以如果要执行, 需要调用
+    var fn=new Function(' console.log("执行Function");');
+    fn();
+    //立即执行函数又称作自调用函数
+    (new Function('console.log("立即执行");'))();
+    //其他写法
+    (function () {
+       console.log("立即执行");
+    })();
+
+    //Function 是创建了一个新的函数
+    //		那么所有的东西, 都只在函数内部起作用
+    //		除非: 	1> 变量没有声明, 直接使用
+    //				2> return
+//    var c=3;
+//    function f(){
+//        c*=2;//没有var声明，直接拿来使用
+//    }
+//    f();
+    //等价于下面这种写法
+    (new Function('c*=2;'))();
+    console.log("c = "+ c);
+
+    (new Function ( 'var d = 4; console.log( "d = " + d );' ) )();
+
+    console.log( d ); // 报错 d is not defined
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>prototype</title>
+</head>
+<body>
+<script>
+function Foo(name) {
+    this.name = name;
+}
+Foo.prototype.myName = function() {
+    return this.name;
+};
+function Bar(name,label) {
+    Foo.call( this, name );
+    this.label = label;
+}
+// 我们创建了一个新的Bar.prototype 对象并关联到Foo.prototype
+Bar.prototype = Object.create( Foo.prototype );
+// 注意！现在没有Bar.prototype.constructor 了
+// 如果你需要这个属性的话可能需要手动修复一下它
+Bar.prototype.myLabel = function() {
+    return this.label;
+};
+var a = new Bar( "a", "obj a" );
+a.myName(); // "a"
+a.myLabel(); // "obj a"
+
+</script>
+</body>
+</html>

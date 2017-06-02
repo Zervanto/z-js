@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>object</title>
+</head>
+<body>
+<script>
+//对象的创建
+//1. 声明形式创建
+// let zObj = {
+//     pname:"Zervanto",
+//     age:23,
+//     isGirl:false,
+//     //...
+// }
+
+//2. 构造形式创建
+// let zObj = new Object()
+// zObj.pname = "Zervanto"
+
+//两者唯一的区别是，在文字声明中你可以添加多个键值对，在构造形式中你必须逐个添加属性。
+
+/*对象属性
+在对象中，属性名永远都是字符串。访问属性有两种方式：
+1. 使用点操作属性访问 `zObj.pname`
+2. 使用中括号操作键访问 `zObj["pname"]`
+
+这两种语法的主要区别在于. 操作符要求属性名满足标识符的命名规范，而[".."] 语法可以接受任意UTF-8/Unicode 字符串作为属性名。*/
+
+// 可计算属性名
+//ES6 增加了可计算属性名，可以在文字形式中使用[] 包裹一个表达式来当作属性名：
+
+let str = "zz"
+let zObj = {
+    [str+"pname"]:"Zervanto"
+}
+console.log(zObj["zzpname"])
+console.log(zObj.zzpname)
+
+</script>
+</body>
+</html>

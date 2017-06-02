@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数作为一般数据使用</title>
+</head>
+<body>
+<script>
+    function fun(){
+        var sum1=123,sum2=456;
+        console.log(sum2);
+        return {
+            fa:function(){
+            return sum1;
+        },
+            fa2:function(value){
+                sum2 =value;
+                console.log(sum2);
+                return sum2;
+            }
+        };
+    }
+    var o=fun();
+    console.log(o.fa());
+    console.log(o.fa2(54345654));
+    var bb=o.fa2(1321313);
+    console.log(bb);
+</script>
+</body>
+</html>

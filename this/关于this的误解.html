@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>this</title>
+</head>
+<body>
+<h2>1. 误解一：指向函数自身 </h2>
+如果要从函数对象内部引用它自身，那只使用this 是不够的。一般来说你需要通过一个指向函数对象的词法标识符（变量）来引用它。使用call(..) 可以确保this 指向函数对象foo 本身
+
+<h2>2. 误解二：this指向函数的作用域</h2>
+this 在任何情况下都不指向函数的词法作用域。
+
+<script>
+
+function foo(num) {
+console.log( "foo: " + num );
+// 记录foo 被调用的次数
+this.count++;
+}
+foo.count = 0;
+// var i;
+for (let i=0; i<10; i++) {
+    if (i > 5) {
+        foo.call(foo, i );
+    }
+}
+// foo: 6
+// foo: 7
+// foo: 8
+// foo: 9
+// foo 被调用了多少次？
+console.log( foo.count ); // 0 -- WTF?
+
+function foo2() {
+    var a = 2;
+    this.bar2();
+}
+function bar2() {
+    console.log( this.a );
+}
+foo2(); // ReferenceError: a is not defined
+
+</script>
+</body>
+</html>

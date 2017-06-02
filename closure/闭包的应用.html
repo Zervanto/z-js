@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var zzload=(function(){
+        var data=[];
+        window.onload= function () {
+            for (var i=0;i<data.length;i++){
+                data[i]();
+            }
+        };
+        return{
+            addEvent: function (fn) {
+                data.push(fn);
+            },removeEvent: function (fn) {
+                for(var i=data.length-1;i>=0;i--){
+                    if(data[i]===fn){
+                        data.splice(i,1);
+                    }
+                }
+            }
+        };
+    })();
+    zzload.addEvent(function(){
+        console.log('我加载了1');
+    });
+    function f(){
+        console.log('我加载了2');
+    }
+    zzload.addEvent(f);
+    zzload.addEvent(function () {
+        console.log('我加载了3');
+    });
+    zzload.removeEvent(f);
+
+    //缓存函数对象
+    var createCache=function () {
+        var data = [],max = 3;
+        // 去掉 var 的目的是为了使得变量编程全局变量, 可以调试查看 data 中的数据
+        // 开发中不允许省略 var
+        function cache(key,value){
+            // 做判断, 如果超出范围, 则, 将最开始加入的 移除
+            // 将数组 第 0 项元素移除的 splice, shift
+            if(data.length>=3){
+                var temp = data.shift();
+                delete cache[temp];
+            }
+            data.push(key);
+            cache[key] = value;
+        }
+        return cache;
+    }
+    cache('hero1','魂');
+    cache('hero2','瞳媚');
+    cache('hero3','沐小葵');
+    cache('hero4','左殇');
+    cache('hero5','银月');
+</script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>词法作用域</title>
+</head>
+<body>
+<script>
+    //1.在没有函数的情况下，所有的变量访问规则按照预解析规则
+    //2.只有函数可以限定作用域
+    function foo(){
+        var num = 1;
+    }
+   // console.log(num);//undefined
+
+    //3.在函数内部是一个独立的完整的作用域结构
+    function  foo(){
+        console.log(num);
+        var num= 2;
+        console.log(num);
+    }
+    foo();
+
+    //4.在函数内部, 允许再定义函数. 同时两个层次的函数都是作用域的独立体
+
+    function foo () {
+        func();
+        function func() {
+            console.log(num);
+            var num = 123;
+            console.log(num);
+        }
+    }
+    foo();
+
+    // 1> 读取代码, 分析全局作用域中有函数 foo
+    // 2> 执行代码, 调用函数 foo
+    // 3> 在 foo 内部, 再次读取代码, 解析, 发现以后函数 func
+    // 4> 在 foo 内部, 再逐语句的解释执行. 调用函数 func
+    // 5> 在 func 内部, 又读取一次代码. 发现有变量声明 num
+    // 6> 在 func 内部, 逐语句的解释执行代码
+    //	6.1 首先打印 num. 因为只是声明了没有赋值. 所以是 undefined
+    // 	6.2 赋值, 得到结果
+    //	6.3 再次打印 num, 打印出 123
+    // 7> func 函数执行结束. 回到 foo 中
+    // 8> foo 执行结束, 回到全局范围.
+    // 9> 所有程序执行结束
+
+
+
+    // 5. 允许在函数内, 访问函数外的变量. 前提是函数内没有该变量的声明( *** )
+
+    // var num = 123;
+    // function foo () {
+    // 	console.log( num );
+    // }
+    // foo();
+
+
+    // function foo () {
+    // 	console.log( num );
+    // }
+    // var num = 123;
+    // foo();
+
+
+    // function foo () {
+    // 	console.log( num );
+    // }
+    // foo();
+    // var num = 123;
+
+    // 1> 读取代码, 发现有声明 foo 与 num
+    // 2> 执行代码:
+    //	2.1 调用
+    //		访问变量. 在外面找. 是可以找得到的. 但是没有被赋值
+    //	2.2 赋值
+
+
+
+    // var num = 123;
+    // function foo () {
+    // 	console.log( num );
+    // 	var num = 456;
+    // 	console.log( num );
+    // }
+    // foo();
+
+    // 1> 预解析. 得到 foo 和 num
+    // 2> 执行代码: 先赋值, 在调用
+    // 3> 进入 foo 内部执行, 再次预解析. 得到 num
+    // 4> 执行 foo 的代码. 首先 打印 num, 没有被赋值, 因此是 undefined
+    // 5> 再给 foo 中的 num 赋值, 再打印 num, 所以得到 456
+
+
+    // 特点:优先访问当前作用域的数据
+    var num = 123;
+    function foo () {
+        console.log( num );		// => 123
+        num = 456;				// 为外面的 num 赋值
+        console.log( num );		// => 456
+    }
+    foo();
+    console.log( num );			// => 456
+
+
+</script>
+</body>
+</html>

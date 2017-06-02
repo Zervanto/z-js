@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>关于闭包</title>
+</head>
+<body>
+<script>
+    function foo () {
+        var num = Math.random();
+        function fn(){
+            return num;
+        }
+        return fn;
+    }
+    // f 中存储的是 foo 里面定义的函数的 引用
+    // 即, 可以使用 f 来调用里面的函数
+
+    // 凡是调用一次 f, 就是调用一次 foo 中定义的函数
+    // 就会利用变量的词法作用域规则返回 foo 中的 num
+    // 即间接访问到了闭包中的数据.
+    var f = foo();// foo 只调用一次, 就可以创建一个原始数据, 但是返回的函数可以重复调用
+    // 每调用一次就是在获得闭包中的数据的值
+    console.log(f);
+    var v1=f();
+    console.log(v1);
+    var v2=f();
+    console.log(v2);
+
+</script>
+</body>
+</html>

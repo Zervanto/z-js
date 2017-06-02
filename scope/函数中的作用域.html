@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>scope</title>
+</head>
+<body>
+<script>
+  function foo(a){
+    var b=2;
+    function bar(){
+        var c=3;
+        console.log(a,b,c);//undefined 2 3
+    }
+    bar();
+    console.log(a,b);
+  }
+  foo();
+ // bar();//bar is not defined
+  // console.log(a,b,c);//is not defined
+</script>
+</body>
+</html>

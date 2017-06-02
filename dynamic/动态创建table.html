@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function cTag(tagName){
+        return document.createElement(tagName);
+    }
+    function Table(option){
+     this.DOM=cTag('table');
+//        var table=cTag('table');
+//        this.DOM=table;
+        for(var k in option){
+//            this.DOM[k]=option[k];//这种写法有时不能添加自定义属性
+        this.DOM.setAttribute(k,option[k]);//这种写法相对麻烦一些，但可以成功添加自定义属性
+        }
+        this.DOM.appendChild(cTag('tbody'));
+        this.add= function () {
+            this.DOM.lastChild.appendChild(tr.DOM);
+        }
+//        this.DOM.lastChild.appendChild(cTag('tr'));
+    }
+    function Tr(){
+        this.DOM=cTag('tr');
+        this.add= function (td) {
+            this.DOM.appendChild(td.DOM);
+        };
+    }
+    function Td(value,option){
+        this.DOM=cTag('td');
+        for(var k in option){
+            this.DOM.setAttribute(k,option[k]);
+        }
+        this.DOM.innerHTML=value;
+//        this.DOM.appendChild(document.createTextNode(value));
+    }
+    var arr = [
+        { name: 'z1', age: 19, gender: '男' },
+        { name: 'z2', age: 18, gender: '男' },
+        { name: 'z3', age: 20, gender: '男' },
+        { name: 'z4', age: 18, gender: '男' }
+    ];
+    var t= new Table({
+        width:600,
+        border:2,
+        zhao:666
+    });
+    //有多少数据就创建多少行
+    for(var i=0;i<arr.length;i++){
+        var tr=new Tr();
+        for(var k in arr[i]){
+            var td=new Td(arr[i][k]);
+            tr.add(td);
+        }
+        t.add(tr);
+    }
+    document.body.appendChild(t.DOM);
+</script>
+</body>
+</html>

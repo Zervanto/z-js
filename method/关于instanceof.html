@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>关于instanceof</title>
+</head>
+<body>
+<script>
+    // instanceof 语法
+    //	boolean 对象 instanceof 构造函数
+    // 判断该对象是否为 构造函数 的 实例	错误
+
+    function Person () {}
+
+    var p1 = new Person();   	// 按照原有的原型结构来创建
+    // p1 -> 原来的 Person.prototype -> Object.prototype -> null
+
+    // 设置原型
+    Person.prototype = {};
+
+    // var p1 = new Person();	// p1 -> 新的 Person.prototype. 即 {} -> Object.prototype -> null
+
+    console.log( p1 instanceof Person );   // 就在判断 {} 是否在 p1 的原型链上
+
+    // 判断 构造函数的 原型属性 是否在对象的原型链上
+
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>经典问题</title>
+</head>
+<body>
+<ul>
+    <li>目录 1 </li>
+    <li>目录 2 </li>
+    <li>目录 3 </li>
+    <li>目录 4 </li>
+    <li>目录 5 </li>
+</ul>
+<script>
+    var arr=[
+        {name:'魂'},
+        {name:'沐小葵'},
+        {name:'左殇'},
+        {name:'瞳媚'}];
+
+    // 利用循环, 给他添加方法, 在方法中打印 name
+    for ( var i = 0; i < arr.length; i++) {
+        // arr[ i ] 绑定方法
+        arr[ i ].sayHello = function () {
+            // 打印名字
+            console.log( 'name = ' + arr[ i ].name );
+        };
+    }
+
+    // 批注
+    // i == 0  =>  arr[ 0 ].sayHello = function () ... => 在 function 中使用的是 arr[ i ]
+    // i == 1	   arr[ 1 ].sayHello = function () ... => 在 function 中使用的是 arr[ i ]
+    // ...
+    // i == 3      arr[ 3 ]... ...
+    // i++ => i === 4 不再小于 4( arr.length ) 跳出循环
+
+
+
+
+    // 依次其中的数据
+    for ( var j = 0; j < arr.length; j++ ) {
+        arr[ j ].sayHello();
+    }
+    // arr[ 0 ].sayHello();
+    // arr[ 1 ].sayHello();
+    // ...
+    // arr[ 3 ].sayHello()
+
+    // for ( var i = 0; i < arr.length; i++ ) {
+    // 	arr[ i ].sayHello();
+    // }
+
+
+    // console.log( i );
+</script>
+<script>
+    // 改所有的 目录提供点击事件, 在点击后 弹出目录中的文本内容
+    var list = document.getElementsByTagName( 'li' );
+    var i;
+    for ( i = 0; i < list.length; i++ ){
+        list[ i ].onclick = function () {
+            // 打印出当前 li 中的 文本
+            // alert( list[ i ].innerHTML );
+            // 将 list[ i ] 换成 this
+            alert( this.innerHTML );
+        };
+    }
+
+
+
+</script>
+</body>
+</html>

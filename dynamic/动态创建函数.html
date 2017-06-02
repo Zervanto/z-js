@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动态创建函数</title>
+</head>
+<body>
+<!--这个div配合方法2使用-->
+    <div id="code" style="display: none">
+        var sum=0;
+        for(var i=min;i<= max;i++){
+        sum+=i;}
+        return sum;
+    </div>
+</body>
+<script>
+    //方法1 这种拼接字符串的方法比较常用
+    var fn1=new Function('min','max',
+            'var sum = 0;'+
+            'for ( var i = min; i <= max; i++ ) { '+
+            'sum += i;'+
+            '}'+
+            ' return sum;');
+    //方法2：利用HTML标签中的value是一个字符串的原理
+    //该方法逼格高，当写起来相对复杂，不常用
+    function tool(idName){
+        var e=document.getElementById(idName);
+        var code= e.lastChild.nodeValue;
+        e.parentNode.removeChild(e);
+        e=null;
+        return code;
+    }
+    var fn2=new Function('min','max',tool('code'));
+    console.log(fn2(1,100));
+
+</script>
+</html>

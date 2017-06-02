@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>块级作用域</title>
+</head>
+<body>
+<script>
+// 用with 从对象中创建出的作用域仅在with 声明中而非外
+// 部作用域中有效。
+try {
+undefined(); // 执行一个非法操作来强制制造一个异常
+}
+catch (err) {
+console.log( err ); // 能够正常执行！
+}
+//console.log( err ); // ReferenceError: err not found
+// 使用let 进行的声明不会在块作用域中进行提升。声明的代码被运行之前，声明并不“存在”。
+
+// console.log( bar ); // ReferenceError!
+// let bar = 2;
+// for (var i=0; i<10; i++) {
+// console.log( i );//0-9
+// }
+// console.log( i );//10
+for (let i=0; i<10; i++) {
+console.log( i );//0-9
+}
+// console.log( i );//i is not defined
+let j;
+for (j=0; j<10; j++) {
+let i = j; // 每个迭代重新绑定！
+console.log( i );
+}
+</script>
+</body>
+</html>

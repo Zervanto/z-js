@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //1 forEach
+    var arr1 = ['hello','js',{},function(){}];
+    arr1.forEach(function(v,i){
+        console.log(i + '=====' + v);
+    });
+    //2.map
+    var arr2=[1,2,3,4];
+    var a=arr2.map(function(v,i){
+        return v*v;
+    });
+    //3.filter
+    var arr3=[1,2,3,4,5,6];
+    var b=arr3.filter(function(v){return v%2===1;});
+    //4.some
+    var arr4=['123',{},function(){},'123'];
+    var isTrue=arr4.every(function(v){return typeof v==='number';});
+    //5.every
+    var arr5 = [ 1, 2, 3, 4, 5, '6' ];
+    var isTrue2 = arr5.every( function ( v ) { return typeof v === 'number'; } );
+    //6.indexOf
+    var arr6=[1,2,3,4,5];
+    var res=arr6.indexOf(4);
+    var res2=arr6.indexOf(4,4);
+    console.log(res,res2);
+    //7.lastIndexOf
+
+
+
+</script>
+
+</body>
+</html>

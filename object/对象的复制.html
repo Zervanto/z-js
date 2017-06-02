@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title></title>
+</head>
+<body>
+<script>
+// const cloneObj = function(obj){
+//     var str, newobj = obj.constructor === Array ? [] : {};
+//     if(typeof obj !== 'object'){
+//         return;
+//     } else if(window.JSON){
+//         str = JSON.stringify(obj), //系列化对象
+//         newobj = JSON.parse(str); //还原
+//     } else {
+//         for(var i in obj){
+//             newobj[i] = typeof obj[i] === 'object' ?
+//             cloneObj(obj[i]) : obj[i];
+//         }
+//     }
+//     return newobj;
+// };
+let obj = {
+    a:"aaa",
+    b:"bbb",
+    c:{
+        d:"ddd",
+        e:"eee"
+    }
+}
+// let newobj = obj
+let newobj = obj
+// let newobj = JSON.parse(JSON.stringify(obj))
+newobj.c= {d:"www"}
+console.log(newobj)//qqq
+console.log(obj)
+console.log(newobj.c)//qqq
+console.log(obj.c)//bbb
+</script>
+</body>
+</html>
