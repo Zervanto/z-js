@@ -1,1 +1,1 @@
-### some demos for learning object-oriened
+### some demos for understanding object-oriened
