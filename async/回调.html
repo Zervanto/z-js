@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>callback</title>
+</head>
+<body>
+<script>
+ listen( "click", function handler(evt){
+    setTimeout( function request(){
+        ajax( "http://some.url.1", function response(text){
+            if (text == "hello") {
+                handler();
+            }
+            else if (text == "world") {
+                request();
+            }
+        } );
+    }, 500) ;
+} );
+doA( function(){
+    doC();
+    doD( function(){
+        doF();
+    } )
+    doE();
+} );
+doB();
+</script>
+</body>
+</html>
