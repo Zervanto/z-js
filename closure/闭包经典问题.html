@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title></title>
+</head>
+<body>
+<script>
+    for(var i=0;i<5;i++){
+        setTimeout(function(){
+            console.log(new Date,i);
+        },1000);
+    }
+    console.log(new Date,i);
+    //5->5,5,5,5,5
+    for(var i=0;i<5;i++){
+        (function(j){
+            setTimeout(function(){
+                console.log(new Date,j);
+            },1000)
+        })(i);
+    }
+    console.log(new Date,i);
+    //5->0,1,2,3,4
+    var output = function(i){
+        setTimeout(function(){
+            console.log(new Date,i);
+        },1000);
+    };
+    for(var i=0;i<5;i++){
+        output(i);
+    }
+    console.log(new Date,i);
+    for(let i=0;i<5;i++){
+        setTimeout(function(){
+            console.log(new Date,i);
+        },1000);
+    }
+</script>
+</body>
+</html>

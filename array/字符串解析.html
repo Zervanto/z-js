@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>str</title>
+</head>
+<body>
+<script>
+const url = "http://www.domain.com/?user=anonymous&id=123&id=456&city=%E5%8C%97%E4%BA%AC&d&enabled";
+function parse(str){
+    if(typeof str !== "string"){
+        return {};
+    }
+    let paramObj = {};
+    let paramArr = decodeURI(str).split("&");
+    for(let i=0;i<paramArr.length;i++){
+        let tmp = paramArr[i].split("=");
+        let key = tmp[0],
+            value = tmp[1]||true;
+        if(typeof value ==="string"&&isNaN(Number(value))===false){
+            value = Number(value);
+        }
+        if(typeof paramObj[key]==="undefined"){
+            paramObj[key] = value;
+        }else {
+            let newValue = Array.isArray(paramObj[key]) ? paramObj[key]:[paramObj[key]];
+            newValue.push(value);
+            paramObj[key]=newValue;
+        }
+    }
+    return paramObj;
+}
+function parseES6(str){
+    if(typeof str !=="string"){
+        return {};
+    }
+    return decodeURI(str).split("&").map(param=>{
+        const tmp = param.split("=");
+        const key = tmp[0];
+        let value = tmp[1]||true;
+        if(typeof value==="string"&& isNaN(Number(value))===false){
+            value = Number(value);
+        }
+        return {key,value};
+    }).reduce((params,item)=>{
+        const {key,value} =item;
+        if(typeof params[key]==="undefined"){
+            params[key] = value;
+        }else {
+            params[key] = Array.isArray(params[key])?params[key]:[params[key]];
+            params[key].push(value);
+        }
+        return params;
+    },{});
+}
+let obj = parseES6(url);
+console.log(obj);
+// let searchParams = new URLSearchParams(url);
+// console.log(searchParams);
+</script>
+</body>
+</html>

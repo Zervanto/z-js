@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title></title>
+</head>
+<body>
+   <ul id="list"></ul>
+<script>
+let ndUl = document.getElementById('list');
+for(let i=0;i<3;i++){
+    let ndItem = document.createElement("li");
+    ndItem.innerText =  i+1;
+    // ndItem.onclick =()=>{
+    //     alert(ndItem.innerText);
+    // }
+    ndUl.appendChild(ndItem);
+}
+ndUl.addEventListener("click",e=>{
+    const target = e.target;
+    alert(target.innerText);
+});
+</script>
+</body>
+</html>
